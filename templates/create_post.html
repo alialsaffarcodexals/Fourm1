@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html>
+<head><title>New Post</title></head>
+<body>
+<h1>Create Post</h1>
+<form method="post" action="/post/create">
+Title: <input type="text" name="title"><br>
+Content:<br>
+<textarea name="content" rows="5" cols="40"></textarea><br>
+Categories:<br>
+{{range .}}
+<label><input type="checkbox" name="categories" value="{{.ID}}">{{.Name}}</label><br>
+{{end}}
+<input type="submit" value="Create">
+</form>
+</body>
+</html>

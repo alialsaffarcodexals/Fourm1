@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Post</title></head>
+<body>
+<a href="/">Back</a>
+<h1>{{.Post.Title}}</h1>
+<p>{{.Post.Content}}</p>
+<p>by {{.Post.Author}} at {{.Post.Created}}</p>
+<p>Likes: {{.Post.Likes}} Dislikes: {{.Post.Dislikes}}</p>
+{{if .UserID}}
+<form method="post" action="/post/{{.ID}}/like"><button type="submit">Like</button></form>
+<form method="post" action="/post/{{.ID}}/dislike"><button type="submit">Dislike</button></form>
+<h2>Add Comment</h2>
+<form method="post" action="/post/{{.ID}}/comment">
+<textarea name="content" rows="4" cols="40"></textarea><br>
+<input type="submit" value="Add Comment">
+</form>
+{{end}}
+<h2>Comments</h2>
+{{range .Comments}}
+<div style="border:1px solid #ccc; padding:5px; margin:5px;">
+<p>{{.Content}}</p>
+<p>by {{.Author}}</p>
+<p>Likes: {{.Likes}} Dislikes: {{.Dislikes}}</p>
+{{if $.UserID}}
+<form method="post" action="/comment/{{.ID}}/like"><button type="submit">Like</button></form>
+<form method="post" action="/comment/{{.ID}}/dislike"><button type="submit">Dislike</button></form>
+{{end}}
+</div>
+{{end}}
+</body>
+</html>
