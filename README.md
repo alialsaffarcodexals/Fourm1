@@ -8,6 +8,7 @@ A minimal web forum implemented in Go with SQLite storage and session-based auth
 - Comment on posts
 - Like or dislike posts and comments
 - Filter posts by category
+- Responsive interface styled with CSS served from `/static`
 - Dockerfile for containerized deployment
 
 ## Running
