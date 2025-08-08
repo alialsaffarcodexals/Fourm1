@@ -1,9 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head><title>Post</title></head>
+<head>
+<title>Post</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
 <body>
-<a href="/">Back</a>
+<header>
 <h1>{{.Post.Title}}</h1>
+<nav><a href="/">Back</a></nav>
+</header>
+<div class="container">
 <p>{{.Post.Content}}</p>
 <p>by {{.Post.Author}} at {{.Post.Created}}</p>
 <p>Likes: {{.Post.Likes}} Dislikes: {{.Post.Dislikes}}</p>
@@ -18,7 +24,7 @@
 {{end}}
 <h2>Comments</h2>
 {{range .Comments}}
-<div style="border:1px solid #ccc; padding:5px; margin:5px;">
+<div class="comment">
 <p>{{.Content}}</p>
 <p>by {{.Author}}</p>
 <p>Likes: {{.Likes}} Dislikes: {{.Dislikes}}</p>
@@ -28,5 +34,6 @@
 {{end}}
 </div>
 {{end}}
+</div>
 </body>
 </html>

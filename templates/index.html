@@ -1,13 +1,21 @@
 <!DOCTYPE html>
 <html>
-<head><title>Forum</title></head>
+<head>
+<title>Forum</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
 <body>
+<header>
 <h1>Forum</h1>
+<nav>
 {{if .UserID}}
 <a href="/logout">Logout</a> | <a href="/post/create">New Post</a>
 {{else}}
 <a href="/login">Login</a> | <a href="/register">Register</a>
 {{end}}
+</nav>
+</header>
+<div class="container">
 <h2>Categories</h2>
 <ul>
 {{range .Categories}}
@@ -16,12 +24,13 @@
 </ul>
 <h2>Posts</h2>
 {{range .Posts}}
-<div style="border:1px solid #ccc; padding:10px; margin:10px;">
+<div class="post">
 <h3><a href="/post/{{.ID}}">{{.Title}}</a></h3>
 <p>{{.Content}}</p>
 <p>by {{.Author}} at {{.Created}}</p>
 <p>Likes: {{.Likes}} Dislikes: {{.Dislikes}}</p>
 </div>
 {{end}}
+</div>
 </body>
 </html>

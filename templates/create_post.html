@@ -1,8 +1,15 @@
 <!DOCTYPE html>
 <html>
-<head><title>New Post</title></head>
+<head>
+<title>New Post</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
 <body>
+<header>
 <h1>Create Post</h1>
+<nav><a href="/">Home</a></nav>
+</header>
+<div class="container">
 <form method="post" action="/post/create">
 Title: <input type="text" name="title"><br>
 Content:<br>
@@ -13,5 +20,6 @@ Categories:<br>
 {{end}}
 <input type="submit" value="Create">
 </form>
+</div>
 </body>
 </html>

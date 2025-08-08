@@ -1,12 +1,20 @@
 <!DOCTYPE html>
 <html>
-<head><title>Login</title></head>
+<head>
+<title>Login</title>
+<link rel="stylesheet" href="/static/style.css">
+</head>
 <body>
+<header>
 <h1>Login</h1>
+<nav><a href="/">Home</a></nav>
+</header>
+<div class="container">
 <form method="post" action="/login">
 Email: <input type="email" name="email"><br>
 Password: <input type="password" name="password"><br>
 <input type="submit" value="Login">
 </form>
+</div>
 </body>
 </html>
