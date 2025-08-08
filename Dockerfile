@@ -1,7 +1,8 @@
-FROM golang:1.22 AS build
+FROM golang:1.24-bullseye AS build
+RUN apt-get update && apt-get install -y gcc
 WORKDIR /app
 COPY . .
-RUN go build -o server .
+RUN CGO_ENABLED=1 GOOS=linux go build -o server .
 
 FROM gcr.io/distroless/base-debian12
 WORKDIR /app
