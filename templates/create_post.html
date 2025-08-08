@@ -1,25 +1,59 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>New Post</title>
-<link rel="stylesheet" href="/static/style.css">
+  <title>Best Forum | New Post</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<header>
-<h1>Create Post</h1>
-<nav><a href="/">Home</a></nav>
-</header>
-<div class="container">
-<form method="post" action="/post/create">
-Title: <input type="text" name="title"><br>
-Content:<br>
-<textarea name="content" rows="5" cols="40"></textarea><br>
-Categories:<br>
-{{range .}}
-<label><input type="checkbox" name="categories" value="{{.ID}}">{{.Name}}</label><br>
-{{end}}
-<input type="submit" value="Create">
-</form>
-</div>
+
+  <input type="checkbox" id="nav-toggle">
+  <input type="checkbox" id="theme-toggle">
+
+  <div class="page">
+    <header>
+      <h1>Best Forum</h1>
+      <label for="nav-toggle" class="nav-toggle-label"><span></span><span></span><span></span></label>
+      <label for="theme-toggle" class="theme-toggle-btn"></label>
+    </header>
+
+    <nav>
+      <a href="/">Home</a>
+      {{if .UserID}}
+        <a href="/post/create">New Post</a>
+        <a href="/logout">Logout</a>
+      {{else}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {{end}}
+      <a href="/about">About</a>
+    </nav>
+
+    <div class="container">
+      <h2>Create a New Post</h2>
+      <form method="post" action="/post/create">
+        <div class="form-group">
+          <label for="title">Title</label>
+          <input id="title" name="title" type="text" required>
+        </div>
+
+        <div class="form-group">
+          <label for="content">Content</label>
+          <textarea id="content" name="content" rows="6" required></textarea>
+        </div>
+
+        <div class="form-group">
+          <label>Categories</label>
+          {{range .Cats}}
+            <label class="checkbox">
+              <input type="checkbox" name="categories" value="{{.ID}}"> {{.Name}}
+            </label>
+          {{end}}
+        </div>
+
+        <input type="submit" value="Create">
+      </form>
+    </div>
+  </div>
 </body>
 </html>

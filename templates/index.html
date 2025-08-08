@@ -1,36 +1,60 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Forum</title>
-<link rel="stylesheet" href="/static/style.css">
+  <title>Best Forum</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<header>
-<h1>Forum</h1>
-<nav>
-{{if .UserID}}
-<a href="/logout">Logout</a> | <a href="/post/create">New Post</a>
-{{else}}
-<a href="/login">Login</a> | <a href="/register">Register</a>
-{{end}}
-</nav>
-</header>
-<div class="container">
-<h2>Categories</h2>
-<ul>
-{{range .Categories}}
-<li><a href="/?category={{.}}">{{.}}</a></li>
-{{end}}
-</ul>
-<h2>Posts</h2>
-{{range .Posts}}
-<div class="post">
-<h3><a href="/post/{{.ID}}">{{.Title}}</a></h3>
-<p>{{.Content}}</p>
-<p>by {{.Author}} at {{.Created}}</p>
-<p>Likes: {{.Likes}} Dislikes: {{.Dislikes}}</p>
-</div>
-{{end}}
-</div>
+
+  <!-- CSS-only toggles (must be before .page and <nav>) -->
+  <input type="checkbox" id="nav-toggle">
+  <input type="checkbox" id="theme-toggle">
+
+  <div class="page">
+    <header>
+      <h1>Best Forum</h1>
+      <label for="nav-toggle" class="nav-toggle-label" aria-label="Open navigation">
+        <span></span><span></span><span></span>
+      </label>
+      <label for="theme-toggle" class="theme-toggle-btn" aria-label="Toggle theme"></label>
+    </header>
+
+    <nav>
+      <a href="/">Home</a>
+      {{if .UserID}}
+        <a href="/post/create">New Post</a>
+        <a href="/logout">Logout</a>
+      {{else}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {{end}}
+      <a href="/about">About</a>
+    </nav>
+
+    <div class="container">
+      <h2>Categories</h2>
+      <ul style="list-style:none; padding:0; margin:0 0 18px;">
+        {{range .Categories}}
+          <li style="display:inline-block; margin:0 10px 10px 0;">
+            <a href="/?category={{.}}" style="padding:8px 12px; background:var(--bg-overlay); border:1px solid var(--border); border-radius:10px;">{{.}}</a>
+          </li>
+        {{end}}
+      </ul>
+
+      <h2>Posts</h2>
+      {{range .Posts}}
+        <div class="post">
+          <h3><a href="/post/{{.ID}}">{{.Title}}</a></h3>
+          <p>{{.Content}}</p>
+          <p>by {{.Author}} — {{.Created}}</p>
+          <div class="actions">
+            <span>👍 {{.Likes}}</span>
+            <span style="margin-left:10px;">👎 {{.Dislikes}}</span>
+          </div>
+        </div>
+      {{end}}
+    </div>
+  </div>
 </body>
 </html>

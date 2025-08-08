@@ -1,39 +1,69 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>Post</title>
-<link rel="stylesheet" href="/static/style.css">
+  <title>Best Forum | Post</title>
+  <link rel="stylesheet" href="/static/style.css">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-<header>
-<h1>{{.Post.Title}}</h1>
-<nav><a href="/">Back</a></nav>
-</header>
-<div class="container">
-<p>{{.Post.Content}}</p>
-<p>by {{.Post.Author}} at {{.Post.Created}}</p>
-<p>Likes: {{.Post.Likes}} Dislikes: {{.Post.Dislikes}}</p>
-{{if .UserID}}
-<form method="post" action="/post/{{.ID}}/like"><button type="submit">Like</button></form>
-<form method="post" action="/post/{{.ID}}/dislike"><button type="submit">Dislike</button></form>
-<h2>Add Comment</h2>
-<form method="post" action="/post/{{.ID}}/comment">
-<textarea name="content" rows="4" cols="40"></textarea><br>
-<input type="submit" value="Add Comment">
-</form>
-{{end}}
-<h2>Comments</h2>
-{{range .Comments}}
-<div class="comment">
-<p>{{.Content}}</p>
-<p>by {{.Author}}</p>
-<p>Likes: {{.Likes}} Dislikes: {{.Dislikes}}</p>
-{{if $.UserID}}
-<form method="post" action="/comment/{{.ID}}/like"><button type="submit">Like</button></form>
-<form method="post" action="/comment/{{.ID}}/dislike"><button type="submit">Dislike</button></form>
-{{end}}
-</div>
-{{end}}
-</div>
+
+  <input type="checkbox" id="nav-toggle">
+  <input type="checkbox" id="theme-toggle">
+
+  <div class="page">
+    <header>
+      <h1>Best Forum</h1>
+      <label for="nav-toggle" class="nav-toggle-label"><span></span><span></span><span></span></label>
+      <label for="theme-toggle" class="theme-toggle-btn"></label>
+    </header>
+
+    <nav>
+      <a href="/">Home</a>
+      {{if .UserID}}
+        <a href="/post/create">New Post</a>
+        <a href="/logout">Logout</a>
+      {{else}}
+        <a href="/login">Login</a>
+        <a href="/register">Register</a>
+      {{end}}
+      <a href="/about">About</a>
+    </nav>
+
+    <div class="container">
+      <h2>{{.Post.Title}}</h2>
+      <p>{{.Post.Content}}</p>
+      <p>by {{.Post.Author}} — {{.Post.Created}}</p>
+      <div class="actions">
+        {{if .UserID}}
+          <form method="post" action="/post/{{.ID}}/like" class="inline-form"><button type="submit">Like</button></form>
+          <form method="post" action="/post/{{.ID}}/dislike" class="inline-form"><button type="submit">Dislike</button></form>
+        {{end}}
+      </div>
+
+      <h2>Comments</h2>
+      {{if .UserID}}
+        <form method="post" action="/post/{{.ID}}/comment">
+          <div class="form-group">
+            <label for="comment">Comment</label>
+            <textarea id="comment" name="content" rows="4" required></textarea>
+          </div>
+          <input type="submit" value="Add Comment">
+        </form>
+      {{end}}
+
+      {{range .Comments}}
+        <div class="comment">
+          <p>{{.Content}}</p>
+          <p>by {{.Author}}</p>
+          {{if $.UserID}}
+            <div class="actions">
+              <form method="post" action="/comment/{{.ID}}/like" class="inline-form"><button type="submit">Like</button></form>
+              <form method="post" action="/comment/{{.ID}}/dislike" class="inline-form"><button type="submit">Dislike</button></form>
+            </div>
+          {{end}}
+        </div>
+      {{end}}
+    </div>
+  </div>
 </body>
 </html>
